@@ -116,8 +116,8 @@ onMounted(() => {
         </div>
       </div>
       <div class="center" @click="handleClear" v-if="imgName && imgSrc">
-        <img :src=src alt="" srcset="">
-        <audio :src="audioSrc" :autoplay="autoplay" loop="loop">
+        <img :src=src alt="" srcset="" @click.stop>
+        <audio :src="audioSrc" :autoplay="autoplay" loop="loop" @click.stop>
           Your browser does not support the audio element.
         </audio>
       </div>
