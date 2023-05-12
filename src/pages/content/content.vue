@@ -55,9 +55,6 @@ let isWeixin = ref(false);
 
 watch([imgName, imgSrc], () => {
   if (imgName.value && imgSrc.value) {
-    // src.value = `src/assets/GIF/${imgSrc.value}/${imgSrc.value}${imgName.value}.gif`;
-    // audioSrc.value = `src/assets/music/${imgSrc.value}.mp3`;
-
     src.value = new URL(`../../assets/GIF/${imgSrc.value}/${imgSrc.value}${imgName.value}.gif`, import.meta.url).href
     audioSrc.value = new URL(`../../assets/music/${imgSrc.value}.mp3`, import.meta.url).href;
   }
@@ -111,20 +108,21 @@ onMounted(() => {
         <div class="top_active" v-if="topIndex == index"></div>
       </div>
     </div>
-    <div class="center" v-if="imgName && imgSrc">
-      <img :src=src alt="" srcset="">
-      <div class="clear" @click="handleClear">清除数据</div>
-      <audio :src="audioSrc" :autoplay="autoplay">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-    <div class="aside">
-      <div class="aside_img" v-for="(item, index) in asideList" :key="item.id" @click="handleClickAside(item, index)">
-        <img :src="item.url" alt="" srcset="">
-        <div class="aside_active" v-if="asideIndex == index"></div>
+    <div class="ac">
+      <div class="aside">
+        <div class="aside_img" v-for="(item, index) in asideList" :key="item.id" @click="handleClickAside(item, index)">
+          <img :src="item.url" alt="" srcset="">
+          <div class="aside_active" v-if="asideIndex == index"></div>
+        </div>
+      </div>
+      <div class="center" @click="handleClear" v-if="imgName && imgSrc">
+        <img :src=src alt="" srcset="">
+        <audio :src="audioSrc" :autoplay="autoplay" loop="loop">
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
-    <Modal title="温馨提示😊" @confirm="confirm" @update="update" :visible="visible">您需要先选择左侧再点击该区域！</Modal>
+    <Modal title="温馨提示:)" @confirm="confirm" @update="update" :visible="visible">您需要先选择左侧再点击该区域！</Modal>
   </div>
   <div v-else>
     检测到在微信内部打开，请复制链接用浏览器打开！
@@ -135,9 +133,7 @@ onMounted(() => {
 .content {
   width: 100%;
   height: 100%;
-  padding: 15px 10px 15px 60px;
-  border-bottom: 2px solid blue;
-  border-top: 2px solid blue;
+  padding: 15px 40px;
   margin-bottom: 10px;
   background-color: #fbfbfb;
   user-select: none;
@@ -159,7 +155,6 @@ onMounted(() => {
         width: 100%;
         height: 100%;
         -webkit-user-drag: none;
-
       }
     }
 
@@ -167,77 +162,61 @@ onMounted(() => {
       position: absolute;
       left: 0;
       width: 6rem;
-      margin-top: 8px;
       border-bottom: .6rem solid #00efff;
     }
   }
 
-  .aside {
+  .ac {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 120px;
+    width: 100%;
+    height: 100%;
 
-    .aside_img {
-      width: 6rem;
-      height: 6rem;
-      margin: 15px 0;
-      cursor: pointer;
-      position: relative;
+    .aside {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      flex-wrap: wrap;
+      width: 120px;
+      height: 650px;
 
-      img {
-        width: 100%;
-        height: 100%;
-        -webkit-user-drag: none;
+      .aside_img {
+        width: 6rem;
+        height: 6rem;
+        margin: 15px 0;
+        cursor: pointer;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          -webkit-user-drag: none;
+        }
+      }
+
+      .aside_active {
+        position: absolute;
+        top: 0;
+        right: -20px;
+        height: 6rem;
+        margin-left: 16px;
+        border-right: .6rem solid #00efff;
       }
     }
 
-    .aside_active {
-      position: absolute;
-      top: 0;
-      right: -20px;
-      height: 6rem;
-      margin-left: 16px;
-      border-right: .6rem solid #00efff;
+    .center {
+      width: 100%;
+      height: 650px;
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 40%;
+        height: 100%;
+        object-fit: cover;
+        -webkit-user-drag: none;
+      }
     }
   }
 
-  .center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    height: 40%;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      -webkit-user-drag: none;
-
-    }
-
-    .clear {
-      text-align: center;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50px;
-      color: #725bda;
-      font-size: 1rem;
-      font-weight: bolder;
-      letter-spacing: 2px;
-      box-shadow: 0 0 10px #eeeeee;
-      cursor: pointer;
-    }
-
-    .clear::after {
-      content: '';
-      background: inherit;
-      filter: blur(10px);
-    }
-  }
 }
 </style>

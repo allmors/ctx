@@ -5,7 +5,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">{{ props.title }}</h4>
                     <button type="button" class="close" @click="closeModal">
-                        <span>&times;</span>
+                        <span>➕</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -48,7 +48,7 @@ const confirm = () => {
 }
 </script>
   
-<style scoped>
+<style scoped lang="less">
 .modal {
     position: fixed;
     top: 0;
@@ -62,18 +62,36 @@ const confirm = () => {
     align-items: center;
 }
 
+.modal-title {
+    color: #1211ff;
+    font-size: 1rem;
+}
+
 .modal-dialog {
     max-width: 600px;
     margin: 0 auto;
     background-color: #fff;
-    border-radius: 8px;
+    border: 1px solid #1211ff;
+}
+
+.close {
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    span {
+        color: #1211ff;
+        display: block;
+        background-color: #fff;
+        transform: rotate(45deg);
+    }
 }
 
 .modal-header,
 .modal-footer {
     padding: 10px 20px;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #e9e9e9;
+    background-color: #fff;
+    border-bottom: 1px solid #1211ff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,35 +103,38 @@ const confirm = () => {
 }
 
 .modal-body {
-    padding: 20px;
+    padding: 40px;
+    color: #1211ff;
 }
 
 .modal-footer button {
     margin-left: 10px;
-    padding: 8px 12px;
+    padding: 6px 12px;
     width: 80px;
     outline: none;
     border: none;
     border-radius: 2px;
+    color: #1211ff;
 }
 
 .modal-footer button:nth-child(2) {
-    background-color: #409eff;
-    color: #fff;
+    background-color: #fff;
+    color: #1211ff;
+    border: 1px solid #1211ff;
 }
 
 .modal-footer button:nth-child(2):hover {
-    background-color: #9cc8f3;
+    background-color: #1211ff;
     color: #fff;
 }
 
 .modal-footer button:nth-child(1) {
-    border: 1px solid #eee;
+    background-color: #fff;
+    color: #1211ff;
+    border: 1px solid #1211ff;
 }
 
 .modal-footer button:nth-child(1):hover {
-    background-color: #eaf2fa;
-    color: #95c6f7;
-    border: 1px solid #95c6f7;
-}
-</style>
+    background-color: #1211ff;
+    color: #fff;
+}</style>
