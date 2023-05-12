@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, onMounted } from "vue";
+import { ref, reactive, watch } from "vue";
 import Modal from "../../components/modal/index.vue"
 // top
 import TIP from "../../assets/PNG/other/TIP.png"
@@ -51,7 +51,7 @@ let asideIndex = ref(-1);
 let audioSrc = ref(null);
 let autoplay = ref(false);
 let visible = ref(false);
-let isWeixin = ref(false);
+
 
 watch([imgName, imgSrc], () => {
   if (imgName.value && imgSrc.value) {
@@ -92,16 +92,10 @@ const update = () => {
   visible.value = false
 }
 
-onMounted(() => {
-  const ua = navigator.userAgent.toLowerCase();
-  isWeixin.value = ua.indexOf("micromessenger") !== -1;
-})
-
-
 </script>
 
 <template>
-  <div class="content" v-if="!isWeixin">
+  <div class="content">
     <div class="top">
       <div class="top_img " v-for="(item, index) in topList" :key="item.id" @click="handleClickTop(item, index)">
         <img :src="item.url" alt="" srcset="">
@@ -123,9 +117,6 @@ onMounted(() => {
       </div>
     </div>
     <Modal title="温馨提示:)" @confirm="confirm" @update="update" :visible="visible">您需要先选择左侧再点击该区域！</Modal>
-  </div>
-  <div v-else>
-    检测到在微信内部打开，请复制链接用浏览器打开！
   </div>
 </template>
 
