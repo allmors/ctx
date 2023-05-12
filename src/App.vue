@@ -3,7 +3,7 @@ import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Content from './pages/content/content.vue'
 
-import { onMounted } from "vue"
+import { ref, onMounted } from "vue"
 
 let isWeixin = ref(false);
 
